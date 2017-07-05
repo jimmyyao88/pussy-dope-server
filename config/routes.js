@@ -1,7 +1,7 @@
 /**
  * Created by jimmy on 6/13/15.
  */
-var Index=require('../app/controllers/index');
+var Track=require('../app/controllers/track');
 
 module.exports=function(app){
     // app.use(function(req,res,next){
@@ -10,7 +10,8 @@ module.exports=function(app){
     //     next();
     // });
 
-    app.get('/',Index.showIndex);
+    app.get('/stream/:id',Track.pipeRawLink);
 
-    app.get('*',Err.error);
+
+    // app.get('*',Err.error);
 };

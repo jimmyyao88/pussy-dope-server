@@ -12,7 +12,7 @@ var bodyParser=require('body-parser');
 var app=express();
 
 
-var dbUrl="mongodb://localhost/cberry";
+var dbUrl="mongodb://localhost/pussy";
 
 //if (process.env.VCAP_SERVICES) {
 //    var db_config = JSON.parse(process.env.VCAP_SERVICES).mongodb[0].credentials;
