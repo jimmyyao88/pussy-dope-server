@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+  <%include ../include/head.ejs%>
+  <link href="/css/notify.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+<body>
+<%include ../include/header.ejs%>
+<div class="container" style="margin-top:70px;">
+  <div class="col-md-3 ">
+    <ul class="nav nav-pills nav-stacked nav-pills-stacked-example notify-side-tab">
+      <li class=""><a href="/notify/show">帖子通知</a></li>
+      <li class=""><a href="/notify/showcomment">评论通知</a></li>
+      <li class="active"><a href="">系统通知</a></li>
+    </ul>
+  </div>
+  <div class="col-md-9 notify-module">
+    <div class="page-header">
+      <h1>系统通知</h1>
+    </div>
+    <ul class="rely-ul">
+      <%notifies.forEach(function(notify,i){%>
+      <li>
+          <div>管理员：</div>
+          <p><%=notify.content%></p>
+          <span style="margin-left:20px;"><%= moment(notify.meta.updateAt).format('YYYY-MM-DD HH:mm:ss') %></span>
+      </li>
+      <%})%>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

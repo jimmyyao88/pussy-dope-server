@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+  <% include ../include/head.ejs %>
+  <link href="/css/list.css" rel="stylesheet" type="text/css" media="all" />
+  <link >
+</head>
+<body>
+<% include ../include/header.ejs%>
+<div class="container result-container">
+  <div class="col-md-8 float-none center-block">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <p><span class="glyphicon glyphicon-search"></span>检索：<%=keyword%>,共找到<%=posts.length%>条结果</p>
+    </div>
+    <div class="panel-body" style="padding:0px;">
+    <% if(!posts){
+    %>
+    <div class="result-zero">对不起 ， 未能找到与"<%=keyword%>"相关的结果</div>
+    <%
+    }%>
+    <%posts.forEach(function(post,i){%>
+    <div class="post-row">
+      <div class="post-left display-ib" style="">
+        <a href=""><img src="/images/noface.png" class="post-avatar"></a>
+      </div>
+      <div class="post-right display-ib" style="width:89%">
+        <a href="/post/detail/<%= post._id %>" class="post-title"><%= post.title %></a><span
+                class="btn-question"><%=post.category.name%> </span><%if(post.top){%><span class="label label-warning">置顶</span><%}%>
+
+        <div class="post-bottom">
+          <div class="post-tag">
+
+          </div>
+          <span class="post-date"><%= moment(post.meta.updateAt).format('YYYY-MM-DD HH:mm:ss') %></span>
+
+          <div class="post-bottom-right">
+          </div>
+        </div>
+      </div>
+    </div>
+    <%})%>
+    </div>
+  </div>
+  </div>
+</div>
+
+<%include ../include/footer.ejs%>
+</body>
+</html>

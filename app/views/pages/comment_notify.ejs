@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+  <%include ../include/head.ejs%>
+</head>
+<body>
+<%include ../include/header.ejs%>
+<div class="container" style="margin-top:70px;">
+  <div class="col-md-3 ">
+    <ul class="nav nav-pills nav-stacked nav-pills-stacked-example notify-side-tab">
+      <li class=""><a href="/notify/show">帖子通知</a></li>
+      <li class="active"><a href="/notify/showcomment">评论通知</a></li>
+      <li class=""><a href="">系统通知</a></li>
+    </ul>
+  </div>
+  <div class="col-md-9 notify-module">
+    <div class="page-header">
+      <h1>评论通知</h1>
+    </div>
+    <ul class="rely-ul">
+      <%commentReplies.forEach(function(comment,i){%>
+      <li>
+        <div class="comment-wrapper">
+          <div class="comment-avatar">
+            <img src="<%=comment.user.avatar%>" class="avatar-round">
+          </div>
+          <div class="comment-content">
+            <a href="/user/planet/<%=comment.user._id%>"><%=comment.user.name%></a>
+            <span>:</span>
+            <%-comment.content%><%if(comment.replyUnread){%><span class="label label-danger pull-right">New</span><%}%>
+            <p class="quote_text">
+              <span>评论了视频:</span>
+              <span><a href="/personal/<%=comment.post._id%>"><%=comment.post.title%></a></span>
+              <span style="margin-left:20px;"><%= moment(comment.meta.updateAt).format('YYYY-MM-DD HH:mm:ss') %></span>
+            </p>
+          </div>
+        </div>
+      </li>
+      <%})%>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>

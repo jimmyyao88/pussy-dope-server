@@ -1,0 +1,37 @@
+body{
+    background-color: #F6F5F6;
+}
+.notify-module {
+    background-color: #fff;
+    padding: 0px;
+}
+.notify-side-tab {
+    background-color: #fff;
+}
+
+.comment-wrapper .comment-avatar {
+    display: inline-block;
+}
+.comment-wrapper .comment-content {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+}
+.avatar-round{border-radius:5px;}
+.rely-ul li{
+    background: #fff;
+    border-top: 1px solid #f0f0f0;
+    padding:10px
+}
+.quote_text{
+    line-height:2;
+}
+.panel-body {
+    padding: 0px;
+}
+
+.notify-module h4{
+    font-size: 16px;
+    font-weight: 500;
+    color:#777777
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <% include ../include/head.ejs %>
+    <link rel="stylesheet" href="/css/detail.css">
+    <link rel="stylesheet" href="/css/simditor.css">
+
+    <script type="text/javascript" src="/js/lib/module.js"></script>
+    <script type="text/javascript" src="/js/lib/hotkeys.js"></script>
+    <script type="text/javascript" src="/js/lib/uploader.js"></script>
+    <script type="text/javascript" src="/js/lib/simditor.js"></script>
+</head>
+<body style="background-color: #E7EAEC;;">
+<% include ../include/header.ejs %>
+<div class="container" data-postid="<%=post._id%>" data-uid="<% if(user){ %><%=user._id%><% } %>"
+     id="detail-wrapper">
+    <div class="col-md-9 detail-inner-wrapper" data-uid="">
+        <div class="col-md-12 detail-reply-wrapper">
+            <div class="detail-wrapper">
+                <h1 class="detail-title"><%= post.title %></h1>
+            </div>
+            <div class="topic-wrapper" style="border-top:0px;">
+                <div class="topic-left">
+                    <div class="topic-avatar">
+                        <img src="<%= post.user.avatar %>">
+                    </div>
+                </div>
+                <div class="topic-right">
+                    <p class="detail-user-info"><a class="topic-name" href="/personal/<%= post.user._id %>"><%= post.user.name %></a><span
+                                class="signature"><%= post.user.signature %></span> <span
+                                class="date"><%= moment(post.meta.updateAt).format('YYYY-MM-DD HH:mm:ss') %></span></p>
+
+                    <div class="topic-content"><%- post.content %></div>
+                    <ul class="topic-navbar">
+                        <li class="topic-watch">
+                            <div><%= post.pv %></div>
+                            <div class="navbar-desc">浏览</div>
+                        </li>
+                        <li class="reply-num">
+                            <div><%= replys.length %></div>
+                            <div class="navbar-desc">回复</div>
+                        </li>
+                        <%if(user){%>
+                        <li class="inter-btn favorite-btn">
+                            <div><i class="fa fa-heart-o"></i></div>
+                            <div data-toggle="modal" data-target="#signin" class="inter-desc">收藏</div>
+                        </li>
+                        <%}else{%>
+                        <li class="inter-btn favorite-btn">
+                            <div><i class="fa fa-heart-o"></i></div>
+                            <div class="inter-desc">收藏</div>
+                        </li>
+                        <%}%>
+
+                        <li class="inter-btn">
+                            <a href="#editor_position" style="color:inherit">
+                                <div><i class="fa fa-comments-o"></i></div>
+                                <div class="inter-desc">评论</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <% replys.forEach(function(reply, i){ %>
+            <div class="topic-wrapper" id="<%=reply._id%>">
+                <div class="topic-left">
+                    <div class="topic-avatar">
+                        <img src="<%= reply.user.avatar %>">
+                    </div>
+                </div>
+                <div class="topic-right">
+                    <p><a class="topic-name" href="/personal/<%= reply.user._id %>"><%= reply.user.name %></a><span
+                                class="point">·</span><span class="floor-num">#<%=reply.floor %>楼</span><span
+                                class="point">·</span><span
+                                class="date"><%= moment(reply.meta.updateAt).format('YYYY-MM-DD HH:mm:ss') %></span><span
+                                class=" float-r btn-reply-get" data-uid="<%= reply.user._id %>"
+                                data-uname="<%= reply.user.name %>"
+                                data-replyid="<%=reply._id%>" data-floor="<%=reply.floor%>"><a href="#editor_position" style="color: inherit"><i
+                                        class="fa fa-reply" style="margin-right:5px;"></i>回复</a></span>
+                    </p>
+
+                    <p class="topic-content"><%- reply.content %></p>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+        <div class="col-md-12 detail-editor-wrapper" id="editor_position">
+            <div class="panel panel-default">
+                <div class="panel-heading">回帖</div>
+                <div class="panel-body">
+                    <% if(user){ %>
+                    <textarea id="editor" autofocus style="margin-bottom: 30px;"></textarea>
+                    <button class="btn-reply float-r" id="btn-reply"
+                            style="margin-top:40px;border-radius:3px;margin-bottom: 40px">回复<i class="fa fa-refresh fa-spin" style="margin-left: 5px"></i>
+                    </button>
+                    <% }else{ %>
+                    <div style="padding:20px;">
+                        需要 <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#signin">登录</a> 后回复方可回复,
+                        如果你还没有账号你可以 <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#signup">注册</a>
+                        一个帐号。
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="side-recommend">
+            <div class="left-header">热门主题</div>
+            <div class="side-wrapper">
+                <ul class="side-ul">
+                    <% hotRecommend.forEach(function(post){ %>
+                    <li class="dot"><a class="dot" href="/post/detail/<%= post._id %>"><img
+                                    src="<%= post.user.avatar %>"><span><%= post.title %></span></a></li>
+                    <% }) %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ../include/footer.ejs %>
+<script type="text/javascript" src="/js/detail.js"></script>
+</body>
+</html>

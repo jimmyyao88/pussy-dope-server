@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+  <%include ../include/head.ejs%>
+
+</head>
+<body>
+<%include ../include/header.ejs%>
+
+
+<%include ../include/footer.ejs%>
+</body>
+</html>
+
+
+
+
+<p class="post-content">
+  <%
+  var imgArr=post.content.match(/<img.*?(?:>|\/>)/gi);
+  post.content = post.content.replace(/(\n)/g, "");
+  post.content = post.content.replace(/(\t)/g, "");
+  post.content = post.content.replace(/(\r)/g, "");
+  post.content = post.content.replace(/<\/?[^>]*>/g, "");
+  if (post.content.length > 20) {
+    post.content = post.content.substring(0, 100) + '...'
+  }
+  if(imgArr){
+  if(imgArr.length==1){
+  %>
+  <%-imgArr[0]%>
+  <%}else {%>
+  <%-imgArr[0]%>
+  <%-imgArr[1]%>
+  <%}
+  }%>
+  %>
+  <%= post.content %>
+</p>

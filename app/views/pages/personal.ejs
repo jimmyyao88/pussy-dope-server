@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+  <%include ../include/head.ejs%>
+
+  <script type="text/javascript" src="/js/lib/module.js"></script>
+  <script type="text/javascript" src="/js/lib/hotkeys.js"></script>
+  <script type="text/javascript" src="/js/lib/uploader.js"></script>
+  <script type="text/javascript" src="/js/lib/simditor.js"></script>
+
+  <script src="/js/page/personal.js"></script>
+  <link rel="stylesheet" href="/css/simditor.css">
+  <link rel="stylesheet" type="text/css" href="/css/personal.css">
+</head>
+<body>
+<%include ../include/header.ejs%>
+  <div class="container" style="max-width:960px">
+    <div class="col-md-8">
+      <div class="user-top">
+        <div class="user-top-left">
+          <img src="<%=_user.avatar%>">
+        </div>
+        <div class="user-top-right">
+        <h3><%=_user.name%><%if(user){if(user._id==_user._id){%><a class="pull-right edit" href="/user/edit">编辑资料</a><%}}%></h3>
+        <p><%=_user.signature%></p>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="user-post personal-module">
+        <h3>创建的话题 <span class="pull-right"><a href="/more/post/<%=uid%>?p=0">更多</a></span></h3>
+        <ul>
+        <%_user.posts.forEach(function(post,i){%>
+          <li><img src="<%=_user.avatar%>" class="">
+              <a href="/post/detail/<%=post._id%>">
+                <span class="dot personal-post-title"><%=post.title%></span>
+              </a>
+              <span class="personal-date pull-right hidden-xs"><%=moment(post.meta.updateAt).format('YYYY-MM-DD HH:mm')%></span>
+          </li>
+          <%})%>
+        </ul>
+      </div>
+      <div class="user-comment personal-module">
+        <h3>评论<span class="pull-right"><a href="/more/reply/<%=uid%>?p=0">更多</a></span></h3>
+        <ul>
+        <%_user.replys.forEach(function(reply,i){%>
+          <li><img src="<%=reply.user.avatar%>">
+            <a href="/post/detail/<%=reply.post._id%>">
+              <span class="dot personal-post-title"><%=reply.post.title%></span>
+            </a>
+          </li>
+        <% }) %>
+        </ul>
+      </div>
+      <div class="user-comment personal-module">
+        <h3>收藏<span class="pull-right"><a href="/more/fav/<%=uid%>?p=0">更多</a></span></h3>
+        <ul>
+          <%_user.favorites.forEach(function(favorite,i){%>
+            <li><img src="<%=favorite.user.avatar%>">
+              <a href="/post/detail/<%=favorite._id%>">
+                <span class="dot personal-post-title"><%=favorite.title%></span>
+              </a>
+            </li>
+          <%})%>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-4">
+       <div class="user-card">
+         <div class="user-card-top">
+           <div class="user-card-avatar">
+              <img src="<%=_user.avatar%>" width="100">
+           </div>
+           <div class="user-card-info">
+             <span><%=_user.name%></span>
+             <span><%=moment(_user.meta.createAt).format('YYYY-MM')%>加入</span>
+           </div>
+         </div>
+         <div class="card-summary">
+           <div class="card-desc">
+             <%-_user.desc%>
+           </div>
+           <%if(user){if(_user._id==user._id){%>
+           <a class="btn-edit">编辑</a>
+           <%}}%>
+           <div class="editor-wrapper">
+             <textarea id="editor"><%=_user.desc%></textarea>
+             <button class="btn btn-default btn-submit-sum pull-right">提交</button>
+             <div class="clearfix"></div>
+           </div>
+         </div>
+       </div>
+    </div>
+  </div>
+</body>
+</html>

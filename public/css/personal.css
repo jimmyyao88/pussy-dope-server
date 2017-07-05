@@ -1,0 +1,57 @@
+body{
+    background-color:#F5F5F5;;
+}
+.user-top{
+    background-color:#fff;
+    padding:20px;
+    border-bottom: 1px solid #eee;
+}
+.user-top-left{
+    float:left;
+    display:block;
+    vertical-align: top;
+}
+.user-top-left img{
+    width:60px;
+    height:60px;
+    border-radius:6px;
+}
+
+.user-top-right{
+    display:block;
+    margin-left:80px;
+}
+.user-top-right p{
+    padding: 0px;
+    margin:0px;
+}
+.user-top-right h3{
+    padding:0px;
+    margin:0px;
+    line-height:1.5
+}
+.user-post{
+    background-color:#fff;
+    padding:20px;
+}
+
+.user-comment{
+    background-color:#fff;
+    padding:20px;
+}
+
+.user-card{
+    background-color:#fff;
+    padding:20px
+}
+.card-summary{
+    background-color:#e0e0e0;
+    padding:20px;
+    margin-top:20px;
+}
+.btn-edit{
+    cursor:pointer
+}
+.user-top-right .edit{
+    font-size: 14px;
+}

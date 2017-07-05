@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+  <%include ../include/head.ejs%>
+  <link href="/css/notify.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+<body style="background-color:#E7EAEC">
+<%include ../include/header.ejs%>
+<div class="container">
+  <div class="col-md-9 center-block float-none">
+    <div class="col-md-12 notify-module panel panel-default">
+      <div class="panel-heading">
+        <h4>新消息</h4>
+      </div>
+      <ul class="rely-ul panel-body">
+        <%if(unreadReplies.length==0&&unreadSysNotifies.length==0&&unreadCommentReplies==0){%>
+          <li>暂无新消息</li>
+        <%}%>
+        <%unreadReplies.forEach(function(reply,i){%>
+        <li>
+          <a href="/user/planet/<%=reply.user._id%>" class="notify-name"><%=reply.user.name%></a><span class="comment-word">评论了帖子:</span><span><a href="/post/detail/<%=reply.post._id%>"><%=reply.post.title%></a></span>
+        </li>
+        <%})%>
+        <%unreadSysNotifies.forEach(function(notify,i){%>
+        <li>
+          <span><%-notify.content%></span>
+        </li>
+        <%})%>
+        <%unreadCommentReplies.forEach(function(reply,i){%>
+        <li>
+          <a href="/user/planet/<%=reply.user._id%>" class="notify-name"><%=reply.user.name%></a><span class="comment-word">评论了帖子:</span><span><a href="/post/detail/<%=reply.post._id%>"><%=reply.post.title%></a></span>
+        </li>
+        <%})%>
+      </ul>
+    </div>
+    <div class="col-md-12 notify-module panel panel-default">
+      <div class="panel-heading">
+        <h4>过往信息</h4>
+      </div>
+      <ul class="rely-ul panel-body">
+        <%if(replies.length==0&&sysNotifies.length==0&&commentReplies){%>
+        <li>暂无消息</li>
+        <%}else{%>
+        <%replies.forEach(function(reply,i){%>
+        <li>
+          <a href="/user/planet/<%=reply.user._id%>" class="notify-name"><%=reply.user.name%></a><span class="comment-word">评论了帖子:</span><span><a href="/post/detail/<%=reply.post._id%>#<%=reply._id%>"><%=reply.post.title%></a></span>
+        </li>
+        <%})%>
+        <%sysNotifies.forEach(function(notify,i){%>
+        <li>
+          <span><%-notify.content%></span>
+        </li>
+        <%})%>
+        <%}%>
+
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

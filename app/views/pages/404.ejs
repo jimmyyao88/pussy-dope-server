@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+  <%include ../include/head.ejs%>
+
+</head>
+<body>
+<%include ../include/header.ejs%>
+<div class="container" style="max-width:960px">
+  <div class="col-md-8 error-page">
+    <h1>404<i class="fa fa-file"></i></h1>
+    <p>很抱歉，您访问的页面不存在</p>
+  </div>
+  <div class="col-md-4 error-page-side">
+    <h4>您可以去看看其他的页面</h4>
+    <ul>
+      <li><a href="/">首页</a></li>
+      <li><a href="/list?p=0">社区</a></li>
+      <li><a href="/list/share?p=0">分享</a></li>
+      <li><a href="/list/trade?p=0">交易</a></li>
+      <li><a href="/list/news?p=0">资讯</a></li>
+      <li><a href="/list/hr?p=0">招聘</a></li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
